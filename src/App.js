@@ -12,7 +12,7 @@ class App extends React.Component {
          <div className="app">
             <Routes>
                <Route path="/" element={<MainPage />} />
-               <Route path="/list/:id" element={<ListPage />} />
+               <Route path="/list" element={<ListPage />} />
             </Routes>
          </div>
       );
