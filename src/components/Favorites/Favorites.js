@@ -18,6 +18,7 @@ class Favorites extends Component {
             <input value={inputValue}
                onChange={(e) => this.setState({ inputValue: e.target.value })}
                placeholder="Новый список" className="favorites__name"
+               disabled={active && true}
             />
             <ul className="favorites__list">
                {this.props.movies.map((item, index) => (
