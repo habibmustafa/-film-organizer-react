@@ -4,7 +4,7 @@ import MovieItem from '../MovieItem/MovieItem';
 import './Movies.css';
 
 class Movies extends Component {
-   
+
    render() {
       return (
          <>
@@ -13,7 +13,10 @@ class Movies extends Component {
                   <li className="movies__item" key={movie.imdbID}>
                      <MovieItem {...movie} />
                   </li>
-               )) : (<li>film tapılmadı..</li>)}
+               ))
+                  : (<li className="not-film">
+                     <ion-icon style={{marginRight: "5px"}} name="alert-circle-outline"></ion-icon>Film tapılmadı..
+                  </li>)}
             </ul>
          </>
       )
