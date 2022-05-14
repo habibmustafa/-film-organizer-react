@@ -1,32 +1,34 @@
 const initialState = {
-   films: []
+   films: [],
+   favoriteFilms: []
 }
 
 export default function reducer(state = initialState, action) {
 
    switch (action.type) {
       case 'SORT_MOVIES':
-         // let newFilms = state.films.slice()
-         // if(action.id === "1")
-         //    newFilms = ["Success"]
-
-         
          return {
             ...state,
-            films: action.payload
+            films: action.data
          }
+      case 'ADD_FAVORITE_FILM': {
+         let newArray = state.favoriteFilms.slice()
+
+         let checkArray = newArray.some(item => item.title === action.payload.Title 
+            && item.year === action.payload.Year)
+
+         checkArray || newArray.push({title: action.payload.Title, year: action.payload.Year})
+
+         console.log(checkArray);
+         console.log(newArray);
+         return {
+            ...state,
+            favoriteFilms: newArray
+         }
+      }
 
       default:
          return state
    }
+
 }
-
-
-// const getData = async () => {
-//    const response = await fetch(`http://www.omdbapi.com/?s=${action.id}&apikey=91b17070`)
-//    const data = await response.json()
-//    console.log(data.Search);
-//    return data
-// }
-// getData().then(data => newFilms = data.Search)
-// console.log(newFilms);

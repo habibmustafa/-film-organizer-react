@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
 import './SearchBox.css';
-import {sortMovies} from "./action"
+import {sortMovies} from "../../redux/action"
 
 class SearchBox extends Component {
    state = {
@@ -49,8 +49,4 @@ const mapDispatchToProps = (dispatch) => {
    }
 }
 
-const mapStateToProps = (state) => {
-   return {a: true}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBox)
+export default connect(undefined, mapDispatchToProps)(SearchBox)

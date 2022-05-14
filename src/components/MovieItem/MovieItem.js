@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './MovieItem.css';
+import { favoriteMovies } from "../../redux/action"
 
 class MovieItem extends Component {
    render() {
@@ -9,11 +11,18 @@ class MovieItem extends Component {
             <img className="movie-item__poster" src={Poster} alt={Title} />
             <div className="movie-item__info">
                <h3 className="movie-item__title">{Title}&nbsp;({Year})</h3>
-               <button type="button" className="movie-item__add-button">Добавить в список</button>
+               <button onClick={() => this.props.favoriteMovies(Title, Year)}
+               type="button" className="movie-item__add-button">Добавить в список</button>
             </div>
          </article>
       );
    }
 }
 
-export default MovieItem;
+const mapDispatchToProps = (dispatch) => {
+   return {
+      favoriteMovies: (title, year) => { dispatch(favoriteMovies(title, year)) }
+   }
+}
+
+export default connect(undefined, mapDispatchToProps)(MovieItem);
