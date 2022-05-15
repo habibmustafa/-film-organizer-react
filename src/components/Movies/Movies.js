@@ -15,7 +15,8 @@ class Movies extends Component {
                   </li>
                ))
                   : (<li className="not-film">
-                     <ion-icon style={{marginRight: "5px"}} name="alert-circle-outline"></ion-icon>Film tapılmadı..
+                     <ion-icon style={{ marginRight: "5px" }} name="alert-circle-outline"></ion-icon>
+                     Film tapılmadı..
                   </li>)}
             </ul>
          </>

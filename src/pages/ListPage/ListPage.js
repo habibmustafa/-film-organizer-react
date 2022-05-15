@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './ListPage.css';
 
-// "https://www.imdb.com/title/tt0068646/"
-
 const ListPage = ({ listPage, movies }) => {
    return (
       <div className="list-page">

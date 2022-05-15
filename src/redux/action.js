@@ -35,8 +35,6 @@ export const listPage = (id) => {
          const data = response.json()
          return data
       }
-      getData().then(data =>  dispatch({ type: 'LIST_MOVIES', payload: {
-         data: data
-      } }))
+      getData().then(data =>  dispatch({ type: 'LIST_MOVIES', payload: { data: data } }))
    }
 }

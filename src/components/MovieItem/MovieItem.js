@@ -19,6 +19,12 @@ class MovieItem extends Component {
    }
 }
 
+// const mapStateToProps = (state) => {
+//    return {
+//       list: state.list
+//    }
+// }
+
 const mapDispatchToProps = (dispatch) => {
    return {
       favoriteMovies: (id, title, year) => { dispatch(favoriteMovies(id, title, year)) }
