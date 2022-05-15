@@ -4,18 +4,21 @@ import './ListPage.css';
 
 // "https://www.imdb.com/title/tt0068646/"
 
-const ListPage = ({ movies }) => {
+const ListPage = ({ listPage, movies }) => {
    return (
       <div className="list-page">
-         <h1 className="list-page__title">Мой список</h1>
+         <h1 className="list-page__title">{listPage.title}</h1>
          <ul>
-            {movies.map((item) => {
+            {/* Loading hissesini duzelt */}
+            {!listPage.movies ? null : listPage.movies.map((item) => {
                return (
-                  <li key={item.id}>
+                  <li key={item}>
                      <a target="_blank" rel="noopener noreferrer"
-                        href={`https://www.imdb.com/title/${item.id}/`}
+                        href={`https://www.imdb.com/title/${item}/`}
                      >
-                        {item.title} ({item.year})
+                        {movies.map(movie => (
+                           movie.id === item ? `${movie.title} (${movie.year})` : false
+                        ))}
                      </a>
                   </li>
                );
@@ -26,7 +29,7 @@ const ListPage = ({ movies }) => {
 }
 
 const mapStateToProps = state => {
-   return { movies: state.favoriteFilms }
+   return { listPage: state.list, movies: state.favoriteFilms }
 }
 
 export default connect(mapStateToProps)(ListPage);

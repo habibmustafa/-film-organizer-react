@@ -1,18 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { removeFavoriteMovies } from '../../redux/action';
+import { listPage, removeFavoriteMovies } from '../../redux/action';
 import './Favorites.css';
-
 
 class Favorites extends Component {
    state = {
       inputValue: '',
-      active: false
+      active: false,
+      isPending: false,
+      id: ''
+   }
+
+   clickBtn = () => {
+
+      this.setState({ isPending: true })
+      const info = {
+         title: this.state.inputValue,
+         movies: this.props.movies.map(movie => movie.id)
+      }
+      fetch('https://acb-api.algoritmika.org/api/movies/list', {
+         method: 'POST',
+         headers: {
+            'Content-type': 'application/json'
+         },
+         body: JSON.stringify(info)
+      })
+      .then(res=> res.json())
+      .then(data => {
+         this.setState({ active: true, isPending: false, id: data.id })
+      })
+      
    }
 
    render() {
-      const {inputValue, active} = this.state
+      const { inputValue, active, isPending } = this.state
       return (
          <div className="favorites">
             <input value={inputValue}
@@ -28,14 +50,14 @@ class Favorites extends Component {
                   </li>
                ))}
             </ul>
-            
-               {active || <button
-                  onClick={() => this.setState({active: true})}
-                  disabled={this.props.movies.length === 0 || !inputValue}
-                  type="button" className="favorites__save">
-                  Сохранить список
-               </button>}
-               {active && <Link to="/list">Перейти к списку</Link>}
+
+            {!active && <button
+               onClick={this.clickBtn}
+               disabled={this.props.movies.length === 0 || !inputValue || isPending}
+               type="button" className="favorites__save">
+               {!isPending ? "Сохранить список" : "Loading.."}
+            </button>}
+            {active && <Link onClick={() => this.props.listPage(this.state.id)} to="/list">Перейти к списку</Link>}
          </div>
       );
    }
@@ -47,7 +69,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
    return {
-      removeMovie: (id) => { dispatch(removeFavoriteMovies(id)) }
+      removeMovie: (id) => { dispatch(removeFavoriteMovies(id)) },
+      listPage: (id) => {dispatch(listPage(id))}
    }
 }
 

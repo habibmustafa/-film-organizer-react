@@ -1,7 +1,8 @@
 const initialState = {
    films: [],
    favoriteFilms: [],
-   activeBtn: false
+   list: '',
+   active: false
 }
 
 export default function reducer(state = initialState, action) {
@@ -12,6 +13,7 @@ export default function reducer(state = initialState, action) {
             ...state,
             films: action.data
          }
+
       case 'ADD_FAVORITE_FILM': {
          let newArray = state.favoriteFilms.slice()
          let checkArray = newArray.some(item => item.id === action.payload.imdbID)
@@ -28,7 +30,7 @@ export default function reducer(state = initialState, action) {
       case 'REMOVE_FAVORITE_FILM': {
          let newArray = state.favoriteFilms.slice()
          for (let i = 0; i < newArray.length; ++i) {
-            if(newArray[i].id === action.id) {
+            if (newArray[i].id === action.id) {
                newArray.splice(i, 1)
                break
             }
@@ -38,6 +40,12 @@ export default function reducer(state = initialState, action) {
             favoriteFilms: newArray
          }
       }
+
+      case 'LIST_MOVIES':
+         return {
+            ...state,
+            list: action.payload.data
+         }
 
       default:
          return state
