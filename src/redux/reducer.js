@@ -7,9 +7,10 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
 
+   console.log(state.active);
+
    switch (action.type) {
       case 'ACTIVE_STATUS': {
-         console.log(action.status);
          return {
             ...state,
             active: action.status
@@ -26,9 +27,11 @@ export default function reducer(state = initialState, action) {
          let newArray = state.favoriteFilms.slice()
          let checkArray = newArray.some(item => item.id === action.payload.imdbID)
 
-         checkArray || newArray.push({
-            id: action.payload.imdbID, title: action.payload.Title, year: action.payload.Year
-         })
+         // ---
+         if(!state.active)
+            checkArray || newArray.push({
+               id: action.payload.imdbID, title: action.payload.Title, year: action.payload.Year
+            })
          return {
             ...state,
             favoriteFilms: newArray

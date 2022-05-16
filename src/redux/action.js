@@ -1,5 +1,5 @@
 
-export const setActive = (status) => {
+export const activeStatus = (status) => {
    return {
       type: 'ACTIVE_STATUS',
       status

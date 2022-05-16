@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { listPage, removeFavoriteMovies } from '../../redux/action';
+import { activeStatus, listPage, removeFavoriteMovies } from '../../redux/action';
 import './Favorites.css';
 
-const Favorites = ({ movies, removeMovie, listPage }) => {
+const Favorites = ({ movies, removeMovie, listPage, activeStatus }) => {
    const [inputValue, setInputValue] = useState('')
    const [active, setActive] = useState(false)
    const [isPending, setIsPending] = useState(false)
@@ -32,6 +32,8 @@ const Favorites = ({ movies, removeMovie, listPage }) => {
          })
    }
 
+   // ---
+   active ? activeStatus(true) : activeStatus(false)
    return (
       <div className="favorites">
          <input value={inputValue}
@@ -69,7 +71,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
    return {
       removeMovie: (id) => { dispatch(removeFavoriteMovies(id)) },
-      listPage: (id) => { dispatch(listPage(id)) }
+      listPage: (id) => { dispatch(listPage(id)) },
+      activeStatus: (status => {dispatch(activeStatus(status))})
    }
 }
 
