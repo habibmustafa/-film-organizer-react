@@ -7,8 +7,6 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
 
-   console.log(state.active);
-
    switch (action.type) {
       case 'ACTIVE_STATUS': {
          return {
@@ -53,8 +51,6 @@ export default function reducer(state = initialState, action) {
       }
 
       case 'LIST_MOVIES':
-         console.log(state.list);
-         console.log(action.payload.data)
          return {
             ...state,
             list: action.payload.data

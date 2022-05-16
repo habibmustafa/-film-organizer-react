@@ -58,7 +58,7 @@ const Favorites = ({ movies, removeMovie, listPage, activeStatus }) => {
          </button>}
          {active && listPage(id)}
          {active && <Link to={`/list/${id}`}>
-            http://localhost:3000/list/{id}
+            Linkə keçid..
          </Link>}
       </div>
    );
