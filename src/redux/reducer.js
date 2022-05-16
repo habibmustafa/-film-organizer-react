@@ -8,6 +8,14 @@ const initialState = {
 export default function reducer(state = initialState, action) {
 
    switch (action.type) {
+      case 'ACTIVE_STATUS': {
+         console.log(action.status);
+         return {
+            ...state,
+            active: action.status
+         }
+      }
+
       case 'SORT_MOVIES':
          return {
             ...state,
@@ -42,6 +50,8 @@ export default function reducer(state = initialState, action) {
       }
 
       case 'LIST_MOVIES':
+         console.log(state.list);
+         console.log(action.payload.data)
          return {
             ...state,
             list: action.payload.data

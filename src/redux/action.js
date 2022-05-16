@@ -1,4 +1,11 @@
 
+export const setActive = (status) => {
+   return {
+      type: 'ACTIVE_STATUS',
+      status
+   }
+}
+
 export const sortMovies = (name) => {
    return (dispatch) => {
       const getData = async () => {

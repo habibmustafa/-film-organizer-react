@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { listPage, removeFavoriteMovies } from '../../redux/action';
 import './Favorites.css';
 
-const Favorites = ({ movies, removeMovie, listPage, list }) => {
+const Favorites = ({ movies, removeMovie, listPage }) => {
    const [inputValue, setInputValue] = useState('')
    const [active, setActive] = useState(false)
    const [isPending, setIsPending] = useState(false)
@@ -30,8 +30,8 @@ const Favorites = ({ movies, removeMovie, listPage, list }) => {
             setIsPending(false)
             setId(data.id)
          })
-
    }
+
    return (
       <div className="favorites">
          <input value={inputValue}

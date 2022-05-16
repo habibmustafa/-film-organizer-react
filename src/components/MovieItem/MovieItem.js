@@ -1,29 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import './MovieItem.css';
 import { favoriteMovies } from "../../redux/action"
 
-class MovieItem extends Component {
-   render() {
-      const { Title, Year, Poster, imdbID } = this.props;
-      return (
-         <article className="movie-item">
-            <img className="movie-item__poster" src={Poster} alt={Title} />
-            <div className="movie-item__info">
-               <h3 className="movie-item__title">{Title}&nbsp;({Year})</h3>
-               <button onClick={() => this.props.favoriteMovies(imdbID, Title, Year)}
+const MovieItem = ({ Title, Year, Poster, imdbID, favoriteMovies }) => {
+   return (
+      <article className="movie-item">
+         <img className="movie-item__poster" src={Poster} alt={Title} />
+         <div className="movie-item__info">
+            <h3 className="movie-item__title">{Title}&nbsp;({Year})</h3>
+            <button onClick={() => favoriteMovies(imdbID, Title, Year)}
                type="button" className="movie-item__add-button">Добавить в список</button>
-            </div>
-         </article>
-      );
-   }
+         </div>
+      </article>
+   );
 }
-
-// const mapStateToProps = (state) => {
-//    return {
-//       list: state.list
-//    }
-// }
 
 const mapDispatchToProps = (dispatch) => {
    return {
